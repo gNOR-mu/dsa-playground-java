@@ -28,6 +28,8 @@ Cada problema tiene test para validarlo, en caso de que no se haya implementado 
 │   └───test                # pruebas
 ```
 
+### - Se ha añadido una carpeta **doc** con documentación sobre algoritmos/estrategias útiles.
+
 # Pruebas
 
 ```shell
