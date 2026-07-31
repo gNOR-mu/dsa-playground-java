@@ -1,5 +1,6 @@
 package problems.list;
 
+import exceptions.NotImplementedException;
 import structures.list.ListNode;
 
 /**
@@ -21,6 +22,6 @@ public class InvertListNode {
      * @return el nuevo nodo cabeza de la lista invertida
      */
     public <T> ListNode<T> solve(ListNode<T> head) {
-        throw new UnsupportedOperationException("Intenta resolverlo");
+        throw new NotImplementedException();
     }
 }
