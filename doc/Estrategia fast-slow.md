@@ -10,6 +10,11 @@ Se inicializan dos punteros en la cabeza (`head`) de la lista:
 1. **Slow (Lento):** Avanza un nodo a la vez (`slow = slow.next`).
 2. **Fast (Rápido):** Avanza dos nodos a la vez (`fast = fast.next.next`).
 
+<figure>
+  <img src="img/middleLinkedList.webp" alt="Middle linked list">
+  <figcaption>Middle of Linked List <a href="https://medium.com/@tanvijain17/fast-and-slow-pointer-technique-a-simple-tool-for-solving-problems-cf56a18743ce">[Medium]</a></figcaption>
+</figure>
+
 ### Plantilla básica en Java:
 ```java
 ListNode<T> slow = head;
@@ -47,6 +52,11 @@ Si hay un ciclo, permite identificar con precisión cuál es el nodo donde comie
 Si una lista enlazada no tiene ciclos, el puntero rápido (`fast`) eventualmente llegará al final (`null`) y el bucle terminará. 
 
 Sin embargo, **si existe un ciclo**, ambos punteros entrarán en el bucle y darán vueltas indefinidamente. Dado que el puntero `fast` se mueve más rápido, la distancia relativa entre ambos disminuye en $1$ en cada iteración. Tarde o temprano, **el puntero rápido alcanzará y se cruzará con el puntero lento** (`slow == fast`).
+
+<figure>
+  <img src="img/Distance-from-Starting-node-of-Loop-to-the-point-------------where-slow-and-fast-meet.webp" alt="Ciclo detectado">
+  <figcaption>Ciclo detectado <a href="https://www.geeksforgeeks.org/dsa/how-does-floyds-slow-and-fast-pointers-approach-work/">[GeeksForGeeks]</a></figcaption>
+</figure>
 
 ### Analogía física:
 Imagina dos corredores en una pista de atletismo circular. Si uno corre al doble de velocidad que el otro, eventualmente el corredor más rápido le sacará una vuelta de ventaja al lento y se cruzarán en el mismo punto de la pista.
