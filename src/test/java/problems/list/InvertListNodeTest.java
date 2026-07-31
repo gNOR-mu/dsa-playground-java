@@ -63,10 +63,10 @@ public class InvertListNodeTest {
     @DisplayName("Debe manejar lista sin lanzar excepciones")
     void shouldHandleListWithNullValuesWithoutException(List<?> original) {
         var expected = original.reversed();
-        var head = ListUtils.serializeListNode(original);
+        var head = ListUtils.deserializeListNode(original);
 
         var newHead = invertListNode.solve(head);
-        var actual = ListUtils.deserializeListNode(newHead);
+        var actual = ListUtils.serializeListNode(newHead);
 
         assertNotNull(actual);
         assertEquals(expected, actual);
@@ -88,10 +88,10 @@ public class InvertListNodeTest {
     @DisplayName("Debe invertir los valores para listas de distintos tipos de datos")
     void shouldInvertValuesInMemoryForDifferentListTypes(List<?> original) {
         var expected = original.reversed();
-        var head = ListUtils.serializeListNode(original);
+        var head = ListUtils.deserializeListNode(original);
 
         var newHead = invertListNode.solve(head);
-        var actual = ListUtils.deserializeListNode(newHead);
+        var actual = ListUtils.serializeListNode(newHead);
 
         assertNotEquals(original, expected);
         assertNotEquals(original, actual);

@@ -1,6 +1,7 @@
 package utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
@@ -11,25 +12,25 @@ import structures.list.ListNode;
 public class ListUtilsTest {
 
     @Test
-    @DisplayName("serializeListNode debe retornar null cuando el arreglo es nulo o vacío")
-    void shouldReturnNullWhenArrayIsNullOrEmpty() {
-        assertNull(ListUtils.serializeListNode(null));
-        assertNull(ListUtils.serializeListNode(List.of()));
+    @DisplayName("deserializeListNode debe retornar null cuando la lista es nula o vacía")
+    void shouldReturnNullWhenListIsNullOrEmpty() {
+        assertNull(ListUtils.deserializeListNode(null));
+        assertNull(ListUtils.deserializeListNode(List.of()));
     }
 
     @Test
-    @DisplayName("serializeListNode debe serializar un arreglo de un solo elemento")
-    void shouldSerializeSingleElementArray() {
-        ListNode<Integer> result = ListUtils.serializeListNode(List.of(10));
+    @DisplayName("deserializeListNode debe deserializar una lista de un solo elemento")
+    void shouldDeserializeSingleElementList() {
+        ListNode<Integer> result = ListUtils.deserializeListNode(List.of(10));
 
         assertEquals(10, result.getVal());
         assertNull(result.getNext());
     }
 
     @Test
-    @DisplayName("serializeListNode debe serializar un arreglo de múltiples elementos en orden")
-    void shouldSerializeMultiElementArray() {
-        ListNode<Integer> result = ListUtils.serializeListNode(List.of(1, 2, 3));
+    @DisplayName("deserializeListNode debe deserializar una lista de múltiples elementos en orden")
+    void shouldDeserializeMultiElementList() {
+        ListNode<Integer> result = ListUtils.deserializeListNode(List.of(1, 2, 3));
 
         assertEquals(1, result.getVal());
         assertEquals(2, result.getNext().getVal());
@@ -38,16 +39,16 @@ public class ListUtilsTest {
     }
 
     @Test
-    @DisplayName("deserializeListNode debe retornar null cuando la cabeza es nula")
-    void shouldReturnNullWhenHeadIsNull() {
-        assertNull(ListUtils.deserializeListNode(null));
+    @DisplayName("serializeListNode no debe retornar null cuando la cabeza es nula")
+    void shouldNotReturnNullWhenHeadIsNull() {
+        assertNotNull(ListUtils.serializeListNode(null));
     }
 
     @Test
-    @DisplayName("deserializeListNode debe deserializar una lista a List de elementos")
-    void shouldDeserializeListNodeToList() {
+    @DisplayName("serializeListNode debe serializar una lista enlazada a List de elementos")
+    void shouldSerializeListNodeToList() {
         ListNode<Integer> head = new ListNode<>(1, new ListNode<>(2, new ListNode<>(3)));
-        List<Integer> result = ListUtils.deserializeListNode(head);
+        List<Integer> result = ListUtils.serializeListNode(head);
 
         assertEquals(3, result.size());
         assertEquals(1, result.get(0));
@@ -56,14 +57,14 @@ public class ListUtilsTest {
     }
 
     @Test
-    @DisplayName("Debe cumplir con el ciclo completo de serialización y deserialización")
+    @DisplayName("Debe cumplir con el ciclo completo de deserialización y serialización")
     void shouldPerformRoundTripCorrectly() {
         List<Integer> original = List.of(5, 10, 15, 20);
-        ListNode<Integer> head = ListUtils.serializeListNode(original);
-        List<Integer> deserialized = ListUtils.deserializeListNode(head);
+        ListNode<Integer> head = ListUtils.deserializeListNode(original);
+        List<Integer> serialized = ListUtils.serializeListNode(head);
 
-        assertEquals(original.size(), deserialized.size());
-        assertEquals(original, deserialized);
+        assertEquals(original.size(), serialized.size());
+        assertEquals(original, serialized);
     }
 
     @Test

@@ -12,53 +12,54 @@ import structures.list.ListNode;
 public class ListUtils {
 
     /**
-     * Convierte un arreglo de elementos en una lista enlazada simple.
-     * La lista se construye en orden, donde el primer elemento del arreglo
-     * será la cabeza (head) de la lista.
-     *
+     * Convierte una colección de elementos en una lista enlazada simple
+     * (deserialización).
+     * 
      * @param <T>   El tipo de dato de los elementos de la lista.
-     * @param nodes Una Lista con los valores a serializar. Puede ser nulo o vacío.
+     * @param nodes Una Lista con los valores a deserializar. Puede ser nulo o
+     *              vacío.
      * @return La cabeza (head) de la lista enlazada construida, o {@code null} si
-     *         el arreglo es nulo o vacío.
+     *         la lista de entrada es nula o vacía.
      */
-    public static <T> ListNode<T> serializeListNode(List<T> nodes) {
+    public static <T> ListNode<T> deserializeListNode(List<T> nodes) {
         if (nodes == null || nodes.isEmpty()) {
             return null;
         }
 
-        ListNode<T> head = null;
+        ListNode<T> dummy = new ListNode<>(null);
+        ListNode<T> current = dummy;
 
-        for (int i = nodes.size() - 1; i >= 0; i--) {
-            head = new ListNode<>(nodes.get(i), head);
+        for (T val : nodes) {
+            current.setNext(new ListNode<>(val));
+            current = current.getNext();
         }
 
-        return head;
+        return dummy.getNext();
     }
 
     /**
-     * Convierte una lista enlazada simple de vuelta en una lista de elementos.
+     * Convierte una lista enlazada simple en una lista de elementos
+     * (serialización).
      *
      * @param <T>  El tipo de dato de los elementos de la lista.
-     * @param head La cabeza (head) de la lista enlazada.
-     * @return Una lista con los valores de los nodos en orden, o {@code null} si la
-     *         cabeza es nula.
+     * @param head La cabeza (head) de la lista enlazada a serializar.
+     * @return Una lista con los valores de los nodos en orden. Nunca retorna null.
      */
-    public static <T> List<T> deserializeListNode(ListNode<T> head) {
-        if (head == null) {
-            return null;
+    public static <T> List<T> serializeListNode(ListNode<T> head) {
+        List<T> serialized = new ArrayList<>();
+        ListNode<T> current = head;
+
+        while (current != null) {
+            serialized.add(current.getVal());
+            current = current.getNext();
         }
 
-        List<T> deserialized = new ArrayList<>();
-
-        while (head != null) {
-            deserialized.add(head.getVal());
-            head = head.getNext();
-        }
-        return deserialized;
+        return serialized;
     }
 
     /**
-     * Obtiene la representación en cadena de la lista enlazada.
+     * Obtiene la representación en cadena de la lista enlazada mostrando los
+     * valores de cada nodo.
      *
      * @param <T>  El tipo de dato de los elementos de la lista.
      * @param head La cabeza (head) de la lista enlazada.
@@ -75,13 +76,4 @@ public class ListUtils {
         return joiner.toString();
     }
 
-    /**
-     * Imprime la representación en cadena de la lista enlazada.
-     *
-     * @param <T>  El tipo de dato de los elementos de la lista.
-     * @param head La cabeza (head) de la lista enlazada.
-     */
-    public static <T> void printListNode(ListNode<T> head) {
-        System.out.println(getStringRepresentation(head));
-    }
 }
