@@ -1,6 +1,5 @@
 package problems.list;
 
-import exceptions.NotImplementedException;
 import structures.list.ListNode;
 
 /**
@@ -32,8 +31,22 @@ public class MiddlePointListNode {
      * @param <T>  El tipo de dato de los elementos en la lista
      * @param head El nodo cabeza de la lista
      * @return El nodo central de la lista
+     * @implNote Utiliza la estrategia de doble punteros fast y slow para encontrar
+     *           el valor central
      */
     public <T> ListNode<T> solve(ListNode<T> head) {
-        throw new NotImplementedException();
+        if (head == null) {
+            return null;
+        }
+
+        ListNode<T> slow = head;
+        ListNode<T> fast = head;
+
+        while (fast != null && fast.getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        }
+
+        return slow;
     }
 }

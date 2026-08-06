@@ -11,10 +11,9 @@ Proyecto personal creado para practicar problemas relacionados con estructuras d
 
 Cada problema se encuentra agrupado respecto a su respectiva estructura de datos (dsa), en donde la documentación de la clase corresponde a su respectivo problema y la documentación del método **solver** respecto a cómo se implementa.
 
-Cada problema tiene un archivo de solución que, como lo indica el nombre, lo resuelve. 
-Ej: el nombre de archivo original es InvertListNode en donde está el problema y InvertListNodeSol en donde está la solución.
+Las soluciones de cada problema se implementan directamente en la misma clase del problema (dentro del método `solve`).
 
-Cada problema tiene test para validarlo, en caso de que no se haya implementado una solución, se omite el test al verificar **UnsupportedOperationException** antes de cada test.
+Cada problema tiene test para validarlo, en caso de que no se haya implementado una solución (y por ende lance `NotImplementedException`), se omite el test al verificar **UnsupportedOperationException** antes de cada test.
 
 # Rutas
 
